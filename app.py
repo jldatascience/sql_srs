@@ -26,6 +26,7 @@ muffin,3
 food_items = pd.read_csv(io.StringIO(csv2))
 
 
+
 # réponse (écrite en tte lettre = string) que l'utilisateur doit donner pour que ça fonctionne :
 answer = """
 SELECT * FROM beverages
@@ -35,6 +36,21 @@ CROSS JOIN food_items
 # voici la df de résultat
 # la solution c la df de résultat qd on prend la query "answer" et kon la met dans duckdb.sql
 solution = duckdb.sql(answer).df()
+
+
+
+
+with st.sidebar:
+    option = st.selectbox(
+       "What would you like to review?",
+       ("Joins", "GroupBy", "Windows Functions"),
+       index=None,
+       placeholder="Select a theme...",
+    )
+    st.write('You selected:', option)
+
+
+
 
 # on met à dispo de l'utilisateur, un text area pour que l'utilisateur puisse entrer sa requete SQL :
 st.header("enter your code")
