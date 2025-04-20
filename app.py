@@ -1,10 +1,13 @@
 # pylint: disable=missing-module-docstring
 
+import io
+
+import ast
 import duckdb
+import pandas as pd
 import streamlit as st
 
 con = duckdb.connect(database="data/exercises_sql_tables.duckdb", read_only=False)
-
 
 
 
@@ -16,7 +19,7 @@ con = duckdb.connect(database="data/exercises_sql_tables.duckdb", read_only=Fals
 with st.sidebar:
     theme = st.selectbox(
         "What would you like to review?",
-        ("cross_joins", "GroupBy", "Windows Functions"),
+        ("cross_joins", "GroupBy", "windows_functions"),
         index=None,
         placeholder="Select a theme...",
     )
@@ -31,9 +34,9 @@ st.header("enter your code")
 query = st.text_area(
     label="votre code SQL ici", key="user_input"
 )  # cette query sert à montrer la df de résultat
-# if query:
-#     result = duckdb.sql(query).df()  # result = c le r+ apres avoir fait la query que l'utilisateur a entré dans la zone de tyexte
-#     st.dataframe(result)
+if query:
+    result = con.execute(query).df()  # result = c le r+ apres avoir fait la query que l'utilisateur a entré dans la zone de tyexte
+    st.dataframe(result)
 #
 #     # test pour compter le nbr de colonnes :
 #    #    if len(result.columns) != len(        # len(result.columns) = longueur de result.columns
@@ -57,22 +60,25 @@ query = st.text_area(
 #        )
 #
 #
-# tab2, tab3 = st.tabs(["Tables", "Solution"])
-#
-#
-# # ces tables presentent les tables qu'a l'utilisateur à sa disposition, et on lui montre
-# # aussi la solution_df cad la df qui est attendu en sortie
-#
-# # dans la tab2, on montre à l'utilisateur, le résultat attendu (solution_df) et les tables ki sont
-# # à sa disposotion (beverages & food_items)
-# with tab2:
-#    st.write("table: beverages")
-#    st.dataframe(beverages)
-#   st.dataframe(food_items)
-#    st.write("expected:")
-#     st.dataframe(solution_df)
-#
-# # et dans une autre table à part (cela permet de cacher le fait d'avoir des tables à part),
-# # il uy aura la réponse (s'il ne trouve pas il peut cliquer sur la table pour voir la réponse)
-# with tab3:
-#    st.write(ANSWER_STR)
+tab2, tab3 = st.tabs(["Tables", "Solution"])
+
+# ces tables presentent les tables qu'a l'utilisateur à sa disposition, et on lui montre
+# aussi la solution_df cad la df qui est attendu en sortie
+
+# dans la tab2, on montre à l'utilisateur, le résultat attendu (solution_df) et les tables ki sont
+# à sa disposotion (beverages & food_items)
+with tab2:
+    exercise_tables = ast.literal_eval(exercise.loc[0, "tables"])
+    for table in exercise_tables:
+        st.write(f"table: {table}")
+        df_table = con.execute(f"SELECT * FROM {table}").df()
+        st.dataframe(df_table)
+
+
+# et dans une autre table à part (cela permet de cacher le fait d'avoir des tables à part),
+# il uy aura la réponse (s'il ne trouve pas il peut cliquer sur la table pour voir la réponse)
+with tab3:
+    exercise_name = exercise.loc[0, "exercise_name"]
+    with open(f"answers/{exercise_name}.sql", "r") as f:
+        answer = f.read()
+    st.write(answer)
