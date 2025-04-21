@@ -1,10 +1,21 @@
 # pylint: disable=missing-module-docstring
 
 import io
+import os
 
 import duckdb
 import pandas as pd
 import streamlit as st
+
+if "data" not in os.listdir():
+    logging.error(os.listdir())
+    logging.error("creating folder data")
+    os.mkdir("data")
+
+if "exercises_sql_tables.duckdb" not in os.listdir("data"):
+    exec(open("init_db.py").read()) # dans ce cas, desactiver pylint car ne fonctionne pas avec exec !
+    # subprocess.run(["python", "init_db.py"])  MAIS subprocess ne fonctionne pas bien sur streamlit !
+
 
 
 
@@ -78,3 +89,6 @@ with tab2:
 # il uy aura la réponse (s'il ne trouve pas il peut cliquer sur la table pour voir la réponse)
 with tab3:
     st.write(answer)
+
+
+con.close()
