@@ -1,7 +1,7 @@
-🧠 SQL Training App avec SRS (Spaced Repetition System)
+SQL Training App avec SRS (Spaced Repetition System)
 
 
-Sujet & objectif :
+🧠 Sujet & objectif :
 
 J’ai créé une application déployée sur Streamlit Cloud permettant à un utilisateur de s'entraîner à des exercices SQL en utilisant le principe du SRS (Spaced Repetition System), afin de favoriser la mémorisation à long terme.
 
@@ -18,9 +18,11 @@ Cela met à jour dynamiquement la table memory_state pour adapter l'ordre d'appa
 
 
 
-👉 Application en ligne : https://sql--srs.streamlit.app/
+👉 Accès :
 
-👉 Repo GitHub : https://github.com/jldatascience/sql_srs
+Application en ligne : https://sql--srs.streamlit.app/
+
+Repo GitHub : https://github.com/jldatascience/sql_srs
 
 
 
