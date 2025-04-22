@@ -5,14 +5,12 @@ Sujet & objectif :
 
 J’ai créé une application déployée sur Streamlit Cloud permettant à un utilisateur de s'entraîner à des exercices SQL en utilisant le principe du SRS (Spaced Repetition System), afin de favoriser la mémorisation à long terme.
 
-
-
-
-SRS – Révision espacée intelligente :
-
 Après chaque exercice, l’utilisateur peut choisir de revoir l’exercice dans :
+
       ⏳ 2 jours (rappel rapide)
+
       📆 7 jours (consolidation)
+
       🧠 21 jours (mémorisation longue durée)
 
 Cela met à jour dynamiquement la table memory_state pour adapter l'ordre d'apparition des exercices.
