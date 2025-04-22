@@ -7,6 +7,7 @@ J’ai créé une application déployée sur Streamlit Cloud permettant à un ut
 
 
 
+
 SRS – Révision espacée intelligente :
 
 Après chaque exercice, l’utilisateur peut choisir de revoir l’exercice dans :
@@ -18,9 +19,11 @@ Cela met à jour dynamiquement la table memory_state pour adapter l'ordre d'appa
 
 
 
+
 👉 Application en ligne : https://sql--srs.streamlit.app/
 
 👉 Repo GitHub : https://github.com/jldatascience/sql_srs
+
 
 
 
