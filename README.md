@@ -14,6 +14,7 @@ Cela met à jour dynamiquement la table memory_state pour adapter l'ordre d'appa
 
 
 👉 Application en ligne : https://sql--srs.streamlit.app/
+
 👉 Repo GitHub : https://github.com/jldatascience/sql_srs
 
 
